@@ -1,0 +1,65 @@
+# Python Caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Local Secrets & Configurations
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+db_config.yaml
+query.json
+
+# IDE Settings
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Database Files (Local runs)
+*.db
+*.sqlite
+*.duckdb
+*.db-journal
+*.sqlite3
+
+# Benchmark Logs & Workspace Dirs (generated during runs)
+logs/
+scratch_work_dir/
+exec_tool_work_dir/
+file_storage/
+*.jsonl
+execute_python_artifacts.jsonl
+*.log
