@@ -1,13 +1,13 @@
 # Hi there, I'm Goutham! 👋
 
-I am a Software Engineer focused on building autonomous AI agents, Large Language Model (LLM) orchestration frameworks, and full-stack web applications. I enjoy solving runtime optimization challenges, securing sandboxed code execution environments, and writing clean, type-safe code.
+I am a Software Engineer focused on building autonomous AI agents, LLM orchestration workflows, and full-stack web applications. My background includes building software products as part of my startup initiative, **Vibely**, and collaborating on computational research projects at **IIT Kharagpur** and **IIT Patna**.
 
 ---
 
 ## 🚀 Current Focus
-- 🤖 **AI Agents & LLMs**: Designing tool-calling workflows, sandboxed python execution runtimes (Docker-based), and self-reflection error-recovery prompts.
-- 💻 **Software Engineering**: Developing modern, responsive web architectures using TypeScript, Next.js, React, and Node.js.
-- 🔬 **Computational Research**: Participating in research collaborations, including projects at IIT Kharagpur, focusing on computational models and AI applications.
+- 🤖 **AI Agents & LLMs**: Designing tool-calling workflows, sandboxed python runtimes (Docker-based), and self-reflection error-recovery prompts.
+- 💻 **Software Engineering**: Developing modern web architectures using TypeScript, Next.js, React, and Node.js.
+- 🔬 **Research & Algorithmic Engineering**: Formulating computational algorithms, data pipelines, and performance optimizations.
 
 ---
 
@@ -26,20 +26,20 @@ I am a Software Engineer focused on building autonomous AI agents, Large Languag
 
 ### 🤖 [GouthamAgent](https://github.com/gouthamdevolops/GouthamAgent)
 A custom autonomous AI data analysis agent built on top of the open-source **DataAgentBench** framework.
-* **Key Achievements**:
-  * Implemented a dynamic variable name sanitizer in `DataAgent` that resolves runtime sandbox `SyntaxError` crashes caused by dashes in LLM tool call IDs.
-  * Engineered lazy-loaded variable wrappers (`SmartVariableList` & `SmartVariableDict`) to query large database payloads inside network-isolated Docker containers without exhausting LLM context limits.
+* **Core Engineering**:
+  * Implemented a dynamic variable name sanitizer in `DataAgent` that resolves runtime sandbox `SyntaxError` crashes caused by dashes in LLM-generated tool call IDs.
+  * Used lazy-loaded variable wrappers (`SmartVariableList` & `SmartVariableDict`) to query large database payloads inside network-isolated Docker containers without context limit exhaustion.
   * Configured a continuous integration testing suite running formatting checks (Ruff) and unit tests via GitHub Actions.
 
-### 🌟 [Vibely]()
-A collaborative web application featuring custom preview frames and modern user interface templates.
-* **Key Achievements**:
-  * Built dynamic, responsive UI preview frames and custom card components using React and TypeScript.
+### 🌟 [Vibely](https://github.com/gouthamdevolops)
+A startup project building collaborative web applications featuring custom preview frames and user interface templates.
+* **Core Engineering**:
+  * Built dynamic, responsive UI preview frames and custom card components using React, TypeScript, and TailwindCSS.
   * Established modular, scalable component design patterns optimizing state management and rendering times.
 
-### 🔬 [IIT Kharagpur Research Projects]()
-Collaborative academic research initiatives focusing on computational analysis, algorithmic engineering, and data-driven intelligence systems.
-* **Key Achievements**:
+### 🔬 [Research Projects (IIT Kharagpur & IIT Patna)](https://github.com/gouthamdevolops)
+Academic research collaborations focusing on computational modeling, algorithmic analysis, and data-driven systems.
+* **Core Engineering**:
   * Formulated computational algorithms to process large dataset arrays.
   * Documented experimental analysis reports for data modeling optimizations.
 
@@ -55,6 +55,5 @@ Collaborative academic research initiatives focusing on computational analysis, 
 ---
 
 ## 📬 Contact Information
-- **LinkedIn**: [linkedin.com/in/goutham-alakuntla](https://www.linkedin.com/in/goutham-alakuntla/) *(Update link if different)*
 - **GitHub**: [github.com/gouthamdevolops](https://github.com/gouthamdevolops)
-- **Technical Portfolio**: [goutham.dev](https://goutham.dev) *(Update link if different)*
+- **LinkedIn**: [linkedin.com/in/goutham-alakuntla](https://www.linkedin.com/in/goutham-alakuntla/) *(Update link if different)*
