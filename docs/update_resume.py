@@ -45,17 +45,15 @@ def main():
         page.insert_textbox(rect_text, text_content, fontsize=7.785, fontname="helv", color=(17/255, 17/255, 17/255), lineheight=1.1)
 
     # 7. Draw Project 1 (GouthamAgent)
-    # Title: GouthamAgent ↗ GitHub
+    # Title: GouthamAgent ↗
     y_title1 = 504.6
     w1 = fitz.get_text_length("GouthamAgent", fontname="hebo", fontsize=8.2125)
     page.insert_text((35.25, y_title1 + 8.2125 * 0.905), "GouthamAgent", fontsize=8.2125, fontname="hebo", color=(17/255, 85/255, 204/255))
     page.insert_text((35.25 + w1, y_title1 + 8.2125 * 0.905), " ↗", fontsize=7.785, fontname="helv", color=(17/255, 85/255, 204/255))
-    w2 = fitz.get_text_length(" ↗", fontname="helv", fontsize=7.785)
-    page.insert_text((35.25 + w1 + w2, y_title1 + 8.2125 * 0.905), " GitHub", fontsize=7.785, fontname="hebo", color=(17/255, 85/255, 204/255))
 
-    # Insert link for Project 1
-    w3 = fitz.get_text_length(" GitHub", fontname="hebo", fontsize=7.785)
-    link_rect1 = fitz.Rect(35.25, 504.6, 35.25 + w1 + w2 + w3, 514.0)
+    # Insert link for Project 1 (GouthamAgent ↗)
+    w2 = fitz.get_text_length(" ↗", fontname="helv", fontsize=7.785)
+    link_rect1 = fitz.Rect(35.25, 504.6, 35.25 + w1 + w2, 514.0)
     page.insert_link({"kind": 2, "from": link_rect1, "uri": "https://github.com/gouthamdevolops/GouthamAgent"})
 
     # Project 1 Description (starts at x=35.25, height=15.0)
@@ -64,30 +62,28 @@ def main():
     desc_text1 = "Custom AI agent built by extending the open-source DataAgentBench framework for data analysis and tool orchestration."
     page.insert_textbox(desc_rect1, desc_text1, fontsize=7.785, fontname="helv", color=(17/255, 17/255, 17/255), lineheight=1.1)
 
-    # Project 1 Bullets (Bullet 1 has a height of 22.0 to allow 2 lines wrapping)
+    # Project 1 Bullets
     draw_bullet(525.5, "Designed and implemented GouthamAgent by extending the open-source DataAgentBench framework with custom prompting and intelligent tool orchestration.", height=22.0)
     draw_bullet(544.5, "Developed custom prompting strategies and tool orchestration for AI-driven data analysis.")
     draw_bullet(554.5, "Improved secure sandbox execution, validation workflows, and automated testing using GitHub Actions CI/CD.")
     draw_bullet(564.5, "Published the project with documentation, architecture diagrams, setup guides, and a production-ready GitHub repository.")
 
-    # Project 1 Tech (height=15.0, separators updated to pipe characters)
+    # Project 1 Tech (height=15.0)
     y_tech1 = 574.5
     tech_rect1 = fitz.Rect(35.25, y_tech1, 577.5, y_tech1 + 15.0)
     tech_text1 = "Tech: Python | AI Agents | LLMs | Prompt Engineering | Docker | GitHub Actions | CI/CD"
     page.insert_textbox(tech_rect1, tech_text1, fontsize=7.785, fontname="helv", color=(68/255, 68/255, 68/255), lineheight=1.1)
 
     # 8. Draw Project 2 (RAG-Based PDF Question-Answering Chatbot)
-    # Title: RAG-Based PDF Question-Answering Chatbot ↗ Code
+    # Title: RAG-Based PDF Question-Answering Chatbot ↗
     y_title2 = 588.5
     w1_p2 = fitz.get_text_length("RAG-Based PDF Question-Answering Chatbot", fontname="hebo", fontsize=8.2125)
     page.insert_text((35.25, y_title2 + 8.2125 * 0.905), "RAG-Based PDF Question-Answering Chatbot", fontsize=8.2125, fontname="hebo", color=(17/255, 85/255, 204/255))
     page.insert_text((35.25 + w1_p2, y_title2 + 8.2125 * 0.905), " ↗", fontsize=7.785, fontname="helv", color=(17/255, 85/255, 204/255))
-    w2_p2 = fitz.get_text_length(" ↗", fontname="helv", fontsize=7.785)
-    page.insert_text((35.25 + w1_p2 + w2_p2, y_title2 + 8.2125 * 0.905), " Code", fontsize=7.785, fontname="hebo", color=(17/255, 85/255, 204/255))
 
-    # Insert link for Project 2
-    w3_p2 = fitz.get_text_length(" Code", fontname="hebo", fontsize=7.785)
-    link_rect2 = fitz.Rect(35.25, y_title2, 35.25 + w1_p2 + w2_p2 + w3_p2, y_title2 + 9.4)
+    # Insert link for Project 2 (RAG-Based PDF Question-Answering Chatbot ↗)
+    w2_p2 = fitz.get_text_length(" ↗", fontname="helv", fontsize=7.785)
+    link_rect2 = fitz.Rect(35.25, y_title2, 35.25 + w1_p2 + w2_p2, y_title2 + 9.4)
     page.insert_link({"kind": 2, "from": link_rect2, "uri": "https://github.com/gouthamdevolops/RAG-Based-PDF-Question-Answering-Chatbot"})
 
     # Project 2 Bullets (y: 600.0, 610.5, 621.0, 631.5)
