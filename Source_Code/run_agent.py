@@ -1,11 +1,12 @@
-from argparse import ArgumentParser
-from pathlib import Path
 import os
 import sys
+from argparse import ArgumentParser
+from pathlib import Path
+
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from common_scaffold.DataAgent import DataAgent
-import logging_config
 from datetime import datetime
+
+from common_scaffold.DataAgent import DataAgent
 
 DATASET_LIST = [
     "bookreview",
@@ -39,12 +40,12 @@ if __name__ == "__main__":
     query_dir = db_dir / f"query{args.query_id}"
     if not query_dir.exists():
         raise ValueError(f"Query directory {query_dir} does not exist.")
-    
+
     db_description_path = db_dir / "db_description.txt"
     if not db_description_path.exists():
         raise ValueError(f"DB description file {db_description_path} does not exist.")
     db_description = db_description_path.read_text().strip()
-    
+
     if args.use_hints:
         hint_path = db_dir / "db_description_withhint.txt"
         if not hint_path.exists():
@@ -52,7 +53,7 @@ if __name__ == "__main__":
         hints = hint_path.read_text()
         db_description += "\n\n" + hints.strip()
 
-        
+
 
     db_config_path = db_dir / "db_config.yaml"
     if not db_config_path.exists():
@@ -83,4 +84,4 @@ if __name__ == "__main__":
         for tool in data_agent.tools.values():
             tool.clean_up()
     print(result)
-    
+

@@ -1,31 +1,31 @@
 """
 DataAgent module.
 Implements the base DataAgent class that manages the main conversational execution loop,
-communicates with the LLM provider via OpenRouter, invokes intermediate tools, 
+communicates with the LLM provider via OpenRouter, invokes intermediate tools,
 manages local file storage memory, and handles validation/logging.
 """
 
+import json
+import logging
 import os
 import sys
-import json
 import time
-import logging
-from pathlib import Path
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from pathlib import Path
+from typing import Any, Dict, Optional
 
 # Ensure project root is in path for framework imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from openai import OpenAI
-from openai.types.chat import ChatCompletionMessage, ChatCompletionMessageToolCall
-from dotenv import load_dotenv
 from common_scaffold.prompts import prompt_builder
 from common_scaffold.tools.BaseTool import BaseTool
 from common_scaffold.tools.ExecTool import ExecTool
 from common_scaffold.tools.ListDBTool import ListDBTool
 from common_scaffold.tools.QueryDBTool import QueryDBTool
 from common_scaffold.tools.ReturnAnswerTool import ReturnAnswerTool
+from dotenv import load_dotenv
+from openai import OpenAI
+from openai.types.chat import ChatCompletionMessage, ChatCompletionMessageToolCall
 
 # Tool call execution message templates
 SUCCESS_TOOL_RESULT_TMPL = """
@@ -41,7 +41,7 @@ The result is:
 SUCCESS_TOOL_PREVIEW_TMPL = """
 The tool {tool_name} was executed successfully.
 
-The result is too large, so it is stored in a file. The file path is stored under key: 
+The result is too large, so it is stored in a file. The file path is stored under key:
 {result_key}
 
 The preview (first {preview_length} characters) of the result is:
@@ -66,10 +66,10 @@ class DataAgent:
     Handles initialization, LLM interactions, tool executions, memory storage, and logging.
     """
     def __init__(
-            self, 
-            query_dir: Path, 
-            db_description: str, 
-            db_config_path: str, 
+            self,
+            query_dir: Path,
+            db_description: str,
+            db_config_path: str,
             deployment_name: str,
             exec_python_timeout: int = 600,
             max_iterations: int = 100,
@@ -122,7 +122,7 @@ class DataAgent:
             user_query = query_info["query"]
         else:
             raise ValueError(f"Unrecognized query.json format: {query_info}")
-            
+
         self.messages = prompt_builder.init_messages(
             user_query=user_query,
             db_description=db_description,
@@ -185,7 +185,7 @@ class DataAgent:
             "validation_log_path": str(self.validation_log_path),
             "tool_log_path": str(self.tool_log_path),
         }
-        
+
     def call_llm(self) -> Optional[ChatCompletionMessage]:
         """
         Submits request to OpenRouter API and saves raw responses to the jsonl log.
@@ -193,7 +193,7 @@ class DataAgent:
         start = time.time()
         response = None
         for attempt in range(3):
-            try: 
+            try:
                 response = self.client.chat.completions.create(
                     model=self.deployment_name,
                     messages=self.messages,
@@ -233,7 +233,7 @@ class DataAgent:
         response_msg = response.choices[0].message if response is not None else None
         if response_msg is not None:
             self.logger.debug(f"\n{'-' * 10}\nLLM response message:\n{response_msg.to_dict()}\n{'-' * 10}\n")
-        
+
         return response_msg
 
     def _handle_tool_call(self, tool_call: ChatCompletionMessageToolCall) -> None:
@@ -241,7 +241,7 @@ class DataAgent:
         Orchestrates safe tool execution, checks preview lengths, and writes output files.
         """
         self.logger.debug(f"🤖 tool_call: {tool_call.model_dump()}")
-        
+
         tool_name = tool_call.function.name
         try:
             tool_args = json.loads(tool_call.function.arguments)
@@ -268,13 +268,13 @@ class DataAgent:
         if tool_name == "execute_python":
             # inject env args
             tool_args['env'] = self.result_storage.copy()
-        
+
         exec_result = self.tools[tool_name].exec(tool_args)  # {"success": bool, "result": json-serializable}
         if exec_result["success"] is True:
             if tool_name == "return_answer":
                 assert self.final_result is None
                 self.final_result = tool_args["answer"] if tool_args["answer"] is not None else ""
-                self.logger.info(f"🛑 Terminating (return_answer)...")
+                self.logger.info("🛑 Terminating (return_answer)...")
                 assert self.final_result is not None
                 self.terminate_reason = "return_answer"
 
@@ -291,7 +291,7 @@ class DataAgent:
                 assert not file_path.exists(), f"File storage path collision: {file_path}"
                 with open(file_path, "w", encoding="utf-8") as f:
                     json.dump(exec_result["result"], f, indent=2)
-                
+
                 # Also store copies/symlinks in exec_tool_work_dir and file_storage under key names
                 # to support agents that mistakenly access it via string name
                 extra_file_path_1 = self.exec_tool_work_dir / f"{result_key}"
@@ -301,7 +301,7 @@ class DataAgent:
                 for path in [extra_file_path_1, extra_file_path_2, extra_file_path_3, extra_file_path_4]:
                     with open(path, "w", encoding="utf-8") as f:
                         json.dump(exec_result["result"], f, indent=2)
-                
+
                 self.result_storage[result_key] = f"file_storage/{os.path.basename(file_path)}"
                 content = SUCCESS_TOOL_PREVIEW_TMPL.replace("{tool_name}", tool_name).replace("{result_key}", result_key).replace("{preview_length}", str(prompt_builder.PREVIEW_LENGTH)).replace("{tool_result_preview}", serialized_result[:prompt_builder.PREVIEW_LENGTH])
             else:
@@ -322,14 +322,14 @@ class DataAgent:
                 content = FAIL_TOOL_PREVIEW_TMPL.replace("{tool_name}", tool_name).replace("{tool_result_preview}", serialized_result[:prompt_builder.PREVIEW_LENGTH])
             else:
                 content = FAIL_TOOL_RESULT_TMPL.replace("{tool_name}", tool_name).replace("{tool_result}", serialized_result)
-            
+
         self.messages.append({
             "role": "tool",
             "tool_call_id": tool_call.id,
             "name": tool_name,
             "content": content
         })
-    
+
     def _handle_content(self, content: str) -> None:
         """
         Handles LLM response when no tool call is requested (fallback mechanism).
@@ -337,7 +337,7 @@ class DataAgent:
         self.logger.debug(f"🤖 content: {content}")
         assert self.final_result is None
         self.final_result = content if content is not None else ""
-        self.logger.info(f"🛑 Terminating (no tool call)...")
+        self.logger.info("🛑 Terminating (no tool call)...")
         assert self.final_result is not None
         self.terminate_reason = "no_tool_call"
 
@@ -347,7 +347,7 @@ class DataAgent:
         """
         if response_msg is None:
             return
-        
+
         tool_calls = response_msg.tool_calls
 
         if tool_calls is None:  # fallback to content
@@ -357,12 +357,12 @@ class DataAgent:
             })
             self._handle_content(response_msg.content)
             return
-        
+
         self.messages.append({
             "role": "assistant",
             "tool_calls": [call.model_dump() for call in tool_calls]
         })
-        
+
         for call in tool_calls:
             self._handle_tool_call(call)
 
@@ -371,7 +371,7 @@ class DataAgent:
             self.logger.info(f"🛑 Terminating (max iterations reached: {self.llm_call_count}/{self.max_iterations})...")
             assert self.final_result is not None
             self.terminate_reason = "max_iterations"
-    
+
     def run(self) -> str:
         """
         Runs the conversational loop until termination criteria are met.
@@ -384,7 +384,7 @@ class DataAgent:
                 if response_msg is not None:
                     self.handle_reponse(response_msg)
             run_end = time.time()
-            
+
             assert self.final_result is not None
             assert self.llm_call_count <= self.max_iterations
             self.logger.info(f"\tllm_calls:\t{self.llm_call_count}")

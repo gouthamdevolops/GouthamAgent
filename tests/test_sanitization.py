@@ -1,5 +1,5 @@
-import sys
 import os
+import sys
 import unittest
 
 # Append Source_Code to path so tests can import from it
@@ -13,10 +13,10 @@ class TestVariableSanitization(unittest.TestCase):
         """
         # Sample tool call ID containing dashes (similar to OpenRouter response formats)
         tool_call_id_with_dashes = "chatcmpl-tool-8a25f14e75b954cc"
-        
+
         # Sanitization mapping
         result_key = f"var_{tool_call_id_with_dashes}".replace("-", "_")
-        
+
         # Assertions
         self.assertNotIn("-", result_key)
         self.assertEqual(result_key, "var_chatcmpl_tool_8a25f14e75b954cc")
@@ -28,7 +28,7 @@ class TestVariableSanitization(unittest.TestCase):
         """
         tool_call_id_clean = "call_abc123"
         result_key = f"var_{tool_call_id_clean}".replace("-", "_")
-        
+
         self.assertEqual(result_key, "var_call_abc123")
         self.assertTrue(result_key.isidentifier())
 

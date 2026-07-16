@@ -39,7 +39,7 @@ KEY RULES (must follow exactly):
 3. For query_db, always specify db_name and query. Refer the DATABASE DESCRIPTION for db_name and query format.
 4. For PostgreSQL, wrap mixed-case or uppercase column names in double quotes.
 5. For list_db, refer the DATABASE DESCRIPTION to specify db_name.
-6. Use execute_python for data processing as needed. 
+6. Use execute_python for data processing as needed.
 7. When using execute_python, your code will be quoted by triple double-quotes and passed as a string to `exec(...)` for execution in a Python 3.12 environment with only pandas and pyarrow installed. So you must ensure your code is compatible with this execution method. For exampe, do not use triple double-quotes in your code, as they may interfere with parsing. Do not use non-built-in or non-installed packages.
 8. When using execute_python, your code must print the result at the end exactly as shown in the PRINT FORMAT section below. The printed result must be a string that can be successfully parsed by json.loads() without errors.
 
@@ -78,7 +78,7 @@ def init_messages(user_query: str, db_description: str, deployment_name: str, sy
     """
     Constructs the initial conversation payload for the LLM.
     Selects model-specific instructions for tool usage based on the deployment provider.
-    For Gemini models, specialized instructions are appended to prevent persistent 
+    For Gemini models, specialized instructions are appended to prevent persistent
     malformed function call errors.
     """
     system_prompt_suffix = ""
@@ -98,7 +98,7 @@ def init_messages(user_query: str, db_description: str, deployment_name: str, sy
     else:
         # Default fallback to standard GPT-style instructions
         tool_call_instructions = GPT_TOOL_CALL_INSTRUCTIONS
-    
+
     return [
         {
             "role": "system",

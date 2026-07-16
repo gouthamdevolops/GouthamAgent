@@ -13,7 +13,7 @@ target-version = "py312"
 [tool.ruff.lint]
 # Enable Pyflakes (F), Pycodestyle (E, W), and Isort (I)
 select = ["E", "F", "W", "I"]
-ignore = []
+ignore = ["E501"]
 
 # Allow fixable violations to be automatically fixed
 fixable = ["ALL"]

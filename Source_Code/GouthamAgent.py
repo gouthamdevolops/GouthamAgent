@@ -1,15 +1,13 @@
 """
 GouthamAgent module.
 Implements the custom GouthamAgent class, which extends the base DataAgent framework.
-Equips the agent with specialized system prompts containing rigorous instructions for 
+Equips the agent with specialized system prompts containing rigorous instructions for
 handling SQLite dialect quirks, python environment formatting rules, and self-reflection.
 """
 
+import json
 import os
 import sys
-import json
-from pathlib import Path
-import logging
 
 # Ensure project root is in the Python system path for framework imports
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -76,7 +74,7 @@ class GouthamAgent(DataAgent):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.logger.info("🤖 Initializing GouthamAgent with custom prompts & reasoning logic...")
-        
+
         # Load user query from query.json
         with open(self.query_dir / "query.json", 'r', encoding="utf-8") as f:
             query_info = json.load(f)
@@ -86,12 +84,12 @@ class GouthamAgent(DataAgent):
             user_query = query_info["query"]
         else:
             raise ValueError(f"Unrecognized query.json format: {query_info}")
-        
+
         # Extract db_description from arguments
         db_description = kwargs.get("db_description")
         if not db_description and len(args) > 1:
             db_description = args[1]
-        
+
         # Overwrite self.messages with GOUTHAM_SYSTEM_PROMPT and model-specific tool rules
         self.messages = prompt_builder.init_messages(
             user_query=user_query,
