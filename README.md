@@ -1,6 +1,9 @@
 # 🤖 GouthamAgent: Custom Data Analysis AI Agent
 
 <p align="center">
+  <img src="docs/images/goutham_agent_banner.jpg" alt="GouthamAgent Banner" width="100%">
+</p>
+
   <img src="https://img.shields.io/badge/Python-3.12-blue.svg" alt="Python">
   <img src="https://img.shields.io/badge/Docker-Enabled-blue.svg" alt="Docker">
   <img src="https://img.shields.io/badge/SQLite-Database-lightgrey.svg" alt="SQLite">
