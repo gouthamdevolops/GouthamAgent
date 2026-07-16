@@ -19,6 +19,8 @@ D:\Goutham_DataAgentBench
 ├── pyproject.toml            # Formatter (Ruff) & test framework settings
 ├── LICENSE                   # Open-source MIT License
 ├── README.md                 # Project entry point and overview
+├── setup.sh                  # Linux/macOS setup automation script
+├── setup.ps1                 # Windows PowerShell setup automation script
 ├── docs/                     # Detailed architectural and usage documentation
 │   ├── Architecture.md
 │   ├── ExecutionFlow.md
@@ -73,6 +75,8 @@ Contains the test suite running standard unit verification checks:
 - **requirements.txt**: Declares explicit dependency versions to maximize reproducibility.
 - **pyproject.toml**: Standardizes configurations for code format checking and pytest run patterns.
 - **LICENSE**: Provides an MIT Open Source license configuration.
+- **setup.sh**: Shell script automating baseline cloning and overlay setup for Linux/macOS.
+- **setup.ps1**: PowerShell script automating baseline cloning and overlay setup for Windows.
 - **.github/workflows/ci.yml**: Configures GitHub Actions CI to run tests and lints automatically on commits.
 
 ---

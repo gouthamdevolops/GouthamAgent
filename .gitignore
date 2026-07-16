@@ -63,3 +63,4 @@ file_storage/
 *.jsonl
 execute_python_artifacts.jsonl
 *.log
+DataAgentBench/

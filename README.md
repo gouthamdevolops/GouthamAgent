@@ -242,6 +242,8 @@ D:\Goutham_DataAgentBench
 ├── LICENSE                   # Open-source MIT License
 ├── CHANGELOG.md              # Historical version updates log
 ├── README.md                 # Project entry point and overview
+├── setup.sh                  # Linux/macOS setup automation script
+├── setup.ps1                 # Windows PowerShell setup automation script
 ├── requirements.txt          # Python packages list
 ├── pyproject.toml            # Formatter & pytest configurations
 ├── docs/                     # Production-quality project documentation
@@ -273,24 +275,42 @@ D:\Goutham_DataAgentBench
 - An **OpenRouter API Key**
 
 ### 2. Set Up the Project
-Clone the benchmark framework:
+
+**Option A: Automated Setup (Recommended)**
+Run the setup utility script for your platform from this repository's root directory:
+- **On Linux/macOS (Bash):**
+  ```bash
+  chmod +x setup.sh
+  ./setup.sh
+  ```
+- **On Windows (PowerShell):**
+  ```powershell
+  ./setup.ps1
+  ```
+This script clones the `DataAgentBench` framework into a subfolder and overlays GouthamAgent's custom files. After it completes, change directory to the cloned workspace:
 ```bash
-git clone https://github.com/DataAgentBench/DataAgentBench.git
 cd DataAgentBench
 ```
 
-Copy GouthamAgent's [Source_Code](file:///D:/Goutham_DataAgentBench/Source_Code) files into the framework's workspace, overwriting existing files in `common_scaffold/` and the root folder.
+**Option B: Manual Setup**
+1. Clone the baseline framework:
+   ```bash
+   git clone https://github.com/DataAgentBench/DataAgentBench.git
+   cd DataAgentBench
+   ```
+2. Copy GouthamAgent's [Source_Code](file:///D:/Goutham_DataAgentBench/Source_Code) files into the cloned repository, replacing the default scaffolding files in `common_scaffold/` and the root folder.
 
 ### 3. Install Dependencies
+Ensure you are inside the `DataAgentBench` folder and run:
 ```bash
 pip install -r requirements.txt
 docker pull python-data:3.12
 ```
 
 ### 4. Configure Environment
-Copy `.env.example` to `.env` and enter your credentials:
+Copy `.env.example` to `.env` in the `DataAgentBench` folder and configure your API keys:
 ```bash
-cp .env.example .env
+cp ../.env.example .env
 ```
 
 *Check [docs/Setup.md](file:///D:/Goutham_DataAgentBench/docs/Setup.md) for more details.*
@@ -410,6 +430,19 @@ My contributions include:
 - Improving project documentation and repository structure
 
 DataAgentBench provides the underlying benchmarking framework, execution environment, and evaluation infrastructure upon which GouthamAgent is built.
+
+## 🗂️ GitHub Repository Metadata
+
+To optimize search discoverability and visual presentation on GitHub, configure the following metadata settings:
+
+* **Repository Description**:
+  > An autonomous AI data analysis agent built on top of DataAgentBench. Supports multi-database tool calling, SQLite/DuckDB querying, and sandboxed python execution with lazy-loaded data variables.
+
+* **Repository Topics**:
+  `ai-agents`, `llm-agents`, `data-agent`, `rag`, `python`, `duckdb`, `sqlite`, `docker-sandbox`, `tool-calling`, `prompt-engineering`, `github-actions`
+
+* **Social Preview Banner Recommendation**:
+  Upload a dark-themed banner (1280x640px) under **Settings -> General -> Social preview** showing the agent data flow: `User Query` ➔ `GouthamAgent Core` ➔ `SQLite / DuckDB Queries` ➔ `Isolated Docker Sandbox` ➔ `Validated Metrics Output`.
 
 ---
 

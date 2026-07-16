@@ -16,19 +16,35 @@ Before setting up GouthamAgent, make sure you have the following installed on yo
 
 ## Installation Steps
 
-### Step 1: Clone the DataAgentBench Framework
-GouthamAgent is built on top of the open-source **DataAgentBench** framework. Clone the benchmark framework repository:
+### Option A: Automated Setup (Recommended)
+To automatically clone the underlying framework and overlay GouthamAgent's custom files, run the setup script for your platform from this repository's root directory:
+
+**On Linux/macOS (Bash):**
 ```bash
-git clone https://github.com/DataAgentBench/DataAgentBench.git
-cd DataAgentBench
+chmod +x setup.sh
+./setup.sh
 ```
 
-### Step 2: Overlay GouthamAgent Source Code
-Copy the files from GouthamAgent's [Source_Code](file:///D:/Goutham_DataAgentBench/Source_Code) directory into the benchmark workspace:
-- Copy [Source_Code/GouthamAgent.py](file:///D:/Goutham_DataAgentBench/Source_Code/GouthamAgent.py) into the framework's `common_scaffold/` directory.
-- Copy [Source_Code/DataAgent.py](file:///D:/Goutham_DataAgentBench/Source_Code/DataAgent.py) into the framework's `common_scaffold/` directory (replacing the default).
-- Copy [Source_Code/prompt_builder.py](file:///D:/Goutham_DataAgentBench/Source_Code/prompt_builder.py) into `common_scaffold/` directory (replacing the default).
-- Copy [Source_Code/run_agent.py](file:///D:/Goutham_DataAgentBench/Source_Code/run_agent.py) into the framework's root folder (replacing the default).
+**On Windows (PowerShell):**
+```powershell
+./setup.ps1
+```
+
+The script will clone `DataAgentBench/` and overlay GouthamAgent's custom Python files automatically. After it completes, change directory to `DataAgentBench/` to continue.
+
+### Option B: Manual Setup
+If you prefer to configure the framework manually, perform the following steps:
+1. **Clone the Benchmark**:
+   ```bash
+   git clone https://github.com/DataAgentBench/DataAgentBench.git
+   cd DataAgentBench
+   ```
+2. **Copy Code Files**:
+   Manually copy GouthamAgent's files from the `Source_Code/` directory into the cloned repository:
+   - Copy [Source_Code/GouthamAgent.py](file:///D:/Goutham_DataAgentBench/Source_Code/GouthamAgent.py) into `common_scaffold/` (replacing the default).
+   - Copy [Source_Code/DataAgent.py](file:///D:/Goutham_DataAgentBench/Source_Code/DataAgent.py) into `common_scaffold/` (replacing the default).
+   - Copy [Source_Code/prompt_builder.py](file:///D:/Goutham_DataAgentBench/Source_Code/prompt_builder.py) into `common_scaffold/` (replacing the default).
+   - Copy [Source_Code/run_agent.py](file:///D:/Goutham_DataAgentBench/Source_Code/run_agent.py) into the root folder (replacing the default).
 
 ### Step 3: Setup Virtual Environment & Dependencies
 Create a virtual environment and install the required dependencies:
